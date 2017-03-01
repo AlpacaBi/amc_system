@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+
+	<constant name="struts.objectFactory" value="spring" />
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+	
+	<package name="AMS" namespace="/" extends="struts-default">
+		<!--拦截器配置  -->
+		<interceptors>
+			<interceptor name ="checklogin" class ="interceptor.CheckLoginInterceptor" /> 
+			<interceptor name ="checkpermission" class ="interceptor.CheckPermissionInterceptor" />
+		   	<interceptor-stack name="withchecklogin">
+           		<interceptor-ref name="checklogin"/>
+		   		<interceptor-ref name="defaultStack"/>
+		   	</interceptor-stack>
+		</interceptors>
+		
+		<!--默认拦截器  -->
+		<default-interceptor-ref name="withchecklogin"/>
+		
+		<!--全局result  -->
+		<global-results>
+			<result name="login">/index.jsp</result>
+			<result name="permission">/nopermission.jsp</result>
+			<result name="error">/error.jsp</result>
+		</global-results>
+		<global-exception-mappings>  
+   			<exception-mapping result="error" exception="java.lang.Exception"/>  
+  		</global-exception-mappings>
+		<!--action  -->
+		<action name="get" class="getName" method="get" />
+		<action name="login" class="loginAction" method="login" />
+		<action name="exit" class="exit" method="exit" >
+			<result name="login">/index.jsp</result>
+		</action>
+		<action name="changepass" class="changePassAction" method="change" />
+		<action name="getdepartment" class="getDepartment" method="get" />
+		<action name="gettype" class="getType" method="get" />
+		<action name="getuser" class="getUser" method="get" />
+		<action name="getnew" class="getNewAction" method="get" />
+		<action name="getbsend" class="getBsendAction" method="get" />
+		<action name="getasset" class="getAsset" method="get" />
+		<action name="changepersondetail" class="changePersonDetailAction" method="change" />
+		<action name="createuser" class="createUserAction" method="create" />
+		<action name="searchuser" class="searchUserAction" method="search" />
+		<action name="deleteuser" class="deleteUserAction" method="delete" />
+		<action name="deleteasset" class="deleteAssetAction" method="delete" />
+		<action name="alteruser" class="alterUserAction" method="alter" />
+		<action name="createadmin" class="createAdminAction" method="create">
+			<interceptor-ref name ="checkpermission" />
+			<interceptor-ref name="defaultStack"/>
+		</action>
+		<action name="searchadmin" class="searchAdminAction" method="search">
+			<interceptor-ref name ="checkpermission" />
+			<interceptor-ref name="defaultStack"/>
+		</action>
+		<action name="deleteadmin" class="deleteAdminAction" method="delete">
+			<interceptor-ref name ="checkpermission" />
+			<interceptor-ref name="defaultStack"/>
+		</action>
+		<action name="createdp" class="createDepartmentAction" method="create" />
+		<action name="searchdp" class="searchDepartmentAction" method="search" />
+		<action name="deletedp" class="deleteDepartmentAction" method="delete" />
+		<action name="alterdp" class="alterDepartmentAction" method="alter" />
+		<action name="createtype" class="createTypeAction" method="create" />
+		<action name="searchtype" class="searchTypeAction" method="search" />
+		<action name="deletetype" class="deleteTypeAction" method="delete" />
+		<action name="altertype" class="alterTypeAction" method="alter" />
+		<action name="createasset" class="createAssetAction" method="create" />
+		<action name="searchasset" class="searchAssetAction" method="search" />
+		<action name="alterasset" class="alterAssetAction" method="alter" />
+		<action name="sxasset" class="createBsendAction" method="create" />
+		<action name="sxwb" class="sxwbAction" method="sxwb" />
+		<action name="statistics" class="statisticsAction" method="search" />
+	</package>
+</struts>

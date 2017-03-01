@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="entity.Bsend" table="bsend" catalog="ams">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="native" />
+        </id>
+        <many-to-one name="assets" class="entity.Assets" fetch="select" lazy="false">
+            <column name="aid" not-null="true" />
+        </many-to-one>
+        <property name="bsenddate" type="java.sql.Timestamp">
+            <column name="bSenddate" length="19" not-null="true" />
+        </property>
+        <property name="cost" type="java.lang.Double">
+            <column name="cost" not-null="true" />
+        </property>
+        <property name="state" type="java.lang.Integer">
+            <column name="state" not-null="true" />
+        </property>
+        <property name="bsendperson" type="java.lang.Integer">
+            <column name="bSendperson" not-null="true" />
+        </property>
+        <property name="description" type="java.lang.String">
+            <column name="description" length="65535" />
+        </property>
+    </class>
+</hibernate-mapping>

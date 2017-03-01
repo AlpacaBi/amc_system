@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="entity.Assets" table="assets" catalog="ams">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="native" />
+        </id>
+        <many-to-one name="department" class="entity.Department" fetch="select" lazy="false">
+            <column name="department"/>
+        </many-to-one>
+        <many-to-one name="user" class="entity.User" fetch="select" lazy="false">
+            <column name="user" />
+        </many-to-one>
+        <many-to-one name="type" class="entity.Type" fetch="select" lazy="false">
+            <column name="type" not-null="true" />
+        </many-to-one>
+        <property name="aid" type="java.lang.String">
+            <column name="aid" length="8" not-null="true" />
+        </property>
+        <property name="assetname" type="java.lang.String">
+            <column name="assetname" length="20" not-null="true" />
+        </property>
+        <property name="version" type="java.lang.String">
+            <column name="version" length="20" />
+        </property>
+        <property name="manufacturer" type="java.lang.String">
+            <column name="manufacturer" length="20" />
+        </property>
+        <property name="manufacturedate" type="java.sql.Timestamp">
+            <column name="manufacturedate" length="19" />
+        </property>
+        <property name="buydate" type="java.sql.Timestamp">
+            <column name="buydate" length="19" not-null="true" />
+        </property>
+        <property name="price" type="java.lang.Double">
+            <column name="price" not-null="true" />
+        </property>
+        <property name="usestate" type="java.lang.Integer">
+            <column name="usestate" not-null="true" />
+        </property>
+        <property name="deprecition" type="java.lang.Integer">
+            <column name="deprecition" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
